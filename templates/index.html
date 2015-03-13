@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block main-content %}
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+            </script>
+
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="#">Home</a>
+                </li>
+                <li class="active">Dashboard</li>
+            </ul><!-- /.breadcrumb -->
+        </div>
+
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    Dashboard
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Página principal
+                    </small>
+                </h1>
+            </div><!-- /.page-header -->
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+                    <div class="row">
+                        <div class="space-6"></div>
+
+                        <div class="col-sm-6">
+                            <div class="col-xs-12 widget-container-col ui-sortable" style="min-height: 106px;">
+                                <h3 class="header smaller lighter blue">Últimas Publicaciones</h3>
+                                <div class="widget-box widget-color-dark light-border ui-sortable-handle" style="opacity: 1; z-index: 0;">
+                                    <div class="widget-header">
+                                        <h5 class="widget-title smaller">Tarea</h5>
+
+                                        <div class="widget-toolbar">
+                                            <span class="badge badge-info">Información</span>
+                                        </div>
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="widget-main padding-6">
+                                            <div class="alert alert-info">
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-6"></div>
+                                <div class="widget-box widget-color-dark light-border ui-sortable-handle" style="opacity: 1; z-index: 0;">
+                                    <div class="widget-header">
+                                        <h5 class="widget-title smaller">Víveres para paseo</h5>
+
+                                        <div class="widget-toolbar">
+                                            <span class="badge badge-warning">Atención</span>
+                                        </div>
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="widget-main padding-6">
+                                            <div class="alert alert-info">
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-6"></div>
+                                <div class="widget-box widget-color-dark light-border ui-sortable-handle" style="opacity: 1; z-index: 0;">
+                                    <div class="widget-header">
+                                        <h5 class="widget-title smaller">Su hijo está apunto de desaprobar el curso</h5>
+
+                                        <div class="widget-toolbar">
+                                            <span class="badge badge-danger">Urgente</span>
+                                        </div>
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="widget-main padding-6">
+                                            <div class="alert alert-info">
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="col-xs-12 widget-container-col ui-sortable" style="min-height: 106px;">
+                                <h3 class="header smaller lighter blue">Chat en línea</h3>
+                                <script>
+                                // Create a new Firebase reference, and a new instance of the Login client
+                                var chatRef = new Firebase('https://s3kschoolchat.firebaseio.com/{{ grade }}/{{ section }}');
+
+                                function login() {
+                                  chatRef.authWithCustomToken('{{ token }}', function(error, authData) {
+                                    if (error) {
+                                        console.log("Login Failder!" + error);
+                                    } else {
+                                        console.log("Authenticated successfully with payload:", authData)
+                                        $("#login-chat").hide();
+                                    }
+                                  });
+                                }
+
+                                // TODO: Controlar el botón de login para que cambie a "Deslogear" cuando este logeado
+                                function buttonCtrl() {
+                                    return 0;
+                                }
+
+                                chatRef.onAuth(function(authData) {
+                                  // Once authenticated, instantiate Firechat with our user id and user name
+                                  if (authData) {
+                                    initChat(authData);
+                                  }
+                                });
+                                </script>
+                                <a id="login-chat" class="btn btn-primary" href='#' onclick='login();'>Entrar al Chat</a>
+                                <script>
+                                    function initChat(authData) {
+                                        var chat = new FirechatUI(chatRef, document.getElementById('firechat-wrapper'));
+                                        chat.setUser(authData.uid, '{{ display_name }}');
+                                    }
+                                </script>
+                                <div id='firechat-wrapper'></div>
+                            </div>
+
+                        </div>
+                    </div><!-- /.row -->
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content -->
+    </div>
+</div><!-- /.main-content -->
+{% endblock %}
